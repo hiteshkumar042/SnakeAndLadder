@@ -11,7 +11,7 @@ namespace SnakeAndLadder
         public static void StartGame()
         {
             //UC1 - single player at start position 0
-            int position = 0, die;
+            int position = 0, die, dieCount = 0;
             Console.WriteLine("Player is at {0} position.", position);
             Random random = new Random();
             
@@ -27,6 +27,12 @@ namespace SnakeAndLadder
                     case 0: //snake
                         Console.WriteLine("It's a Snake with {0} points", die);
                         position = position - die; //move behind by points
+                        if (position < 0)
+                        {
+                            position = 0;
+                        }
+                        //UC6 -  Counting the die roll
+                        dieCount++;
                         break;
                     case 1: //ladder
                         Console.WriteLine("It's a Ladder with {0} points", die);
@@ -36,6 +42,12 @@ namespace SnakeAndLadder
                         {
                             position = position - die;
                         }
+                        else if (position == 100)
+                        {
+                            Console.WriteLine("Player Won!");
+                        }
+                        //UC6 - Counting the die roll 
+                        dieCount++;
                         break;
                     default: //No Play
                         Console.WriteLine("It's a no Play, No Points");
@@ -44,6 +56,7 @@ namespace SnakeAndLadder
                 }
                 Console.WriteLine("Player is at {0} position.", position);
             }
+            Console.WriteLine("Die rolled for {0} times.", dieCount);
             
         }
     }
